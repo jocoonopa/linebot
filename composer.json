@@ -1,0 +1,20 @@
+{
+    "name": "jocoonopa/linebot",
+    "description": "Let using line-bot-sdk be much more comfortable in Laravel5.5+",
+    "type": "plugin",
+    "require": {
+        "linecorp/line-bot-sdk": "^2.3"
+    },
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "jocoonopa",
+            "email": "jocoonopa@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "jocoonopa\\LINEBot\\": "src"
+        }
+    }
+}
