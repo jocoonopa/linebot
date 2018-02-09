@@ -4,7 +4,7 @@ namespace jocoonopa\LINEBot\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class LineBot extends Facade
+class LINEBot extends Facade
 {
     /**
      * {@inheritdoc}

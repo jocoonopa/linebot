@@ -6,7 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use LINE\LINEBot;
 use LINE\LINEBot\HTTPClient;
 use LINE\LINEBot\HTTPClient\CurlHTTPClient;
-use LINEBot as JaLINEBot;
+use jocoonopa\LINEBot\LINEBot as JaLINEBot;
 
 class LINEBotServiceProvider extends ServiceProvider
 {
@@ -18,22 +18,8 @@ class LINEBotServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../config/linebot.php' => config_path('linebot.php'),
+            __DIR__.'/../config/linebot.php' => config_path('linebot.php'),
         ]);
-
-        $this->app->bind(HTTPClient::class, function($app) {
-            return new CurlHTTPClient(config('jocoonopa.channel_access_token'));
-        });
-
-        $this->app->bind(LINEBot::class, function($app) {
-            return new LINEBot(
-                $app->make(HTTPClient::class), 
-
-                [
-                    'channelSecret' => config('jocoonopa.channel_secret'),
-                ]
-            );
-        });
     }
 
     /**
@@ -43,11 +29,34 @@ class LINEBotServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton(JaLINEBot::class, function ($app) {
-            return $app->make(JaLINEBot::class);
+        $this->registerConfigurations();
+
+        $this->app->bind(HTTPClient::class, function($app) {
+            return new CurlHTTPClient(config('linebot.channel_access_token'));
         });
 
-        $this->app->alias(JaLINEBot::class, 'linebot');
+        $this->app->bind(LINEBot::class, function($app) {
+            return new LINEBot(
+                $app->make(HTTPClient::class), 
+
+                [
+                    'channelSecret' => config('linebot.channel_secret'),
+                ]
+            );
+        });
+
+        $this->app->singleton('linebot', function ($app) {
+            return new JaLINEBot(
+                $app->make(LINEBot::class)
+            );
+        });
+    }
+
+    public function provides()
+    {
+        return [
+            'linebot',
+        ];
     }
 
     /**
@@ -57,17 +66,8 @@ class LINEBotServiceProvider extends ServiceProvider
     protected function registerConfigurations()
     {
         $this->mergeConfigFrom(
-            $this->packagePath('config/linebot.php'), 'jocoonopa.linebot'
+            $this->packagePath('config/linebot.php'), 'linebot'
         );
-
-        $this->publishes([
-            $this->packagePath('config/linebot.php') => config_path('jocoonopa/linebot.php'),
-        ], 'config');
-    }
-
-    public function provides()
-    {
-        return ['linebot'];
     }
 
     /**

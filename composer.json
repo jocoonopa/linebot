@@ -3,6 +3,7 @@
     "description": "Let using line-bot-sdk be much more comfortable in Laravel5.5+",
     "type": "plugin",
     "require": {
+        "illuminate/support": ">=4.0",
         "linecorp/line-bot-sdk": "^2.3"
     },
     "license": "MIT",
@@ -15,6 +16,16 @@
     "autoload": {
         "psr-4": {
             "jocoonopa\\LINEBot\\": "src"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "jocoonopa\\LINEBot\\LINEBotServiceProvider"
+            ],
+            "aliases": {
+                "LINEBot": "jocoonopa\\LINEBot\\Facades\\LINEBot"
+            }
         }
     }
 }
