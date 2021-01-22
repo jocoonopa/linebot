@@ -6,7 +6,7 @@
         "illuminate/support": ">=4.0",
         "linecorp/line-bot-sdk": "^6.3"
     },
-    "version": "1.0.0",
+    "version": "6.3.0",
     "keywords": ["Laravel", "LINEBOT", "LINE"],
     "license": "MIT",
     "authors": [
