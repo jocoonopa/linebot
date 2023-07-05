@@ -4,9 +4,9 @@
     "type": "plugin",
     "require": {
         "illuminate/support": ">=4.0",
-        "linecorp/line-bot-sdk": "^6.1"
+        "linecorp/line-bot-sdk": "^7.6"
     },
-    "version": "6.3.1",
+    "version": "7.6.1",
     "keywords": ["Laravel", "LINEBOT", "LINE"],
     "license": "MIT",
     "authors": [
