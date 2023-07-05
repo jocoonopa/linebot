@@ -7,7 +7,7 @@
         "linecorp/line-bot-sdk": "^7.6"
     },
     "version": "7.6.1",
-    "keywords": ["Laravel", "LINEBOT", "LINE"],
+    "keywords": ["Laravel", "LINEBOT", "LINE", "First Line"],
     "license": "MIT",
     "authors": [
         {
